@@ -16,9 +16,11 @@ using Registration.DomainCore.Services.Abstractions;
 using Registration.DomainModels.Models;
 using Registration.WebApi.Mapper;
 using System;
+using FluentValidation.AspNetCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Registration.WebApi.ValidationFilters;
 
 namespace Registration.WebApi
 {
@@ -39,6 +41,14 @@ namespace Registration.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
             services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+            });
 
 
             services.AddSwaggerGen(options =>
@@ -56,6 +66,9 @@ namespace Registration.WebApi
                     }
                 });
             });
+
+            services.AddMvc(o => o.Filters.Add<GlobalValidationFilter>())
+                .AddFluentValidation(Configuration => Configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(ObjectsMapper));
