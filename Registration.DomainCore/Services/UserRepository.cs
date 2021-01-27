@@ -19,7 +19,7 @@ namespace Registration.DomainCore.Services
             _signInManager = signInManager;
         }
 
-        public async Task<bool> ChangeGeneralInformation(int userId, UserInformation info)
+        public async Task<bool> ChangeGeneralInformationAsync(int userId, UserInformation info)
         {
             var user = await _userManager.FindByIdAsync(userId.ToString());
             user.GeneralInformation = info;
@@ -27,20 +27,20 @@ namespace Registration.DomainCore.Services
             return result.Succeeded;
         }
 
-        public async Task<bool> DeleteUser(int id)
+        public async Task<bool> DeleteUserAsync(int id)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             var result = await _userManager.DeleteAsync(user);
             return result.Succeeded;
         }
 
-        public async Task<bool> LogIn(LogInUser item)
+        public async Task<bool> LogInAsync(LogInUser item)
         {
             var result = await _signInManager.PasswordSignInAsync(item.Email, item.Password, item.Remember, false);
             return result.Succeeded;
         }
 
-        public async Task<bool> Registration(User item,string password)
+        public async Task<bool> RegistrationAsync(User item,string password)
         {
             var result = await _userManager.CreateAsync(item, password);
             return result.Succeeded;

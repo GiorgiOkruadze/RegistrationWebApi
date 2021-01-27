@@ -1,3 +1,5 @@
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -9,7 +11,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Registration.DomainCore.DB;
+using Registration.DomainCore.Services;
+using Registration.DomainCore.Services.Abstractions;
 using Registration.DomainModels.Models;
+using Registration.WebApi.Mapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +57,9 @@ namespace Registration.WebApi
                 });
             });
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(typeof(ObjectsMapper));
+            services.AddMediatR(typeof(Startup));
             services.AddControllers();
         }
 
