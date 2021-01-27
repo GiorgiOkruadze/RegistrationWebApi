@@ -16,13 +16,13 @@ namespace Registration.WebApi.Mapper
             CreateMap<RegisterUserCommand, User>()
                 .ForMember(d => d.Email, m => m.MapFrom(o => o.Email))
                 .ForMember(d => d.UserName, m => m.MapFrom(o => o.UserName))
-                .ForMember(d => d.GeneralInformation, m => m.MapFrom(o => new
+                .ForMember(d => d.GeneralInformation, m => m.MapFrom(o => new UserInformation()
                 {
-                    o.PersonalNumber,
-                    o.IsMarried,
-                    o.IsEmployed,
-                    o.RemunerationPerMonthe,
-                    o.Address
+                   PersonalNumber = o.PersonalNumber,
+                   IsMarried = o.IsMarried,
+                   IsEmployed = o.IsEmployed,
+                   RemunerationPerMonthe = o.RemunerationPerMonthe,
+                   Address = o.Address
                 })).ReverseMap();
 
             CreateMap<UpdateUserInfoCommand, UserInformation>()

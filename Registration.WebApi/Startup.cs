@@ -40,7 +40,10 @@ namespace Registration.WebApi
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddIdentity<User, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<User, UserRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.Configure<IdentityOptions>(options =>
             {
                 options.Password.RequireDigit = false;
@@ -50,12 +53,19 @@ namespace Registration.WebApi
                 options.Password.RequireUppercase = false;
             });
 
+            services.AddMvc(o => o.Filters.Add<GlobalValidationFilter>())
+                .AddFluentValidation(Configuration => Configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddAutoMapper(typeof(ObjectsMapper));
+            services.AddMediatR(typeof(Startup));
+
 
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("Registration", new Microsoft.OpenApi.Models.OpenApiInfo()
                 {
-                    Title = "Registration",
+                    Title = "Registration Api",
                     Version = "4",
                     Description = "Giorgi Okruadze Registration Api",
                     Contact = new Microsoft.OpenApi.Models.OpenApiContact()
@@ -67,12 +77,6 @@ namespace Registration.WebApi
                 });
             });
 
-            services.AddMvc(o => o.Filters.Add<GlobalValidationFilter>())
-                .AddFluentValidation(Configuration => Configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddAutoMapper(typeof(ObjectsMapper));
-            services.AddMediatR(typeof(Startup));
             services.AddControllers();
         }
 
@@ -94,7 +98,7 @@ namespace Registration.WebApi
             app.UseSwagger();
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/Registration/swagger.json", "Registration");
+                options.SwaggerEndpoint("/swagger/Registration/swagger.json", "Registration Api");
                 options.RoutePrefix = "";
             });
 

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Registration.DomainModels.Models;
 using System;
@@ -10,7 +11,6 @@ namespace Registration.DomainCore.DB
     public class ApplicationDbContext:IdentityUserContext<User,int>
     {
         public DbSet<UserInformation> UserInformations { get; set; }
-
         public ApplicationDbContext() { }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 

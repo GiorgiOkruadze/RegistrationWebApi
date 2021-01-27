@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Registration.DomainCore.DB;
 using Registration.DomainCore.Services.Abstractions;
 using Registration.DomainModels.Models;
 using System;
@@ -11,20 +13,22 @@ namespace Registration.DomainCore.Services
     public class UserRepository : IUserRepository
     {
         private readonly UserManager<User> _userManager = default;
+        private readonly ApplicationDbContext _dbContext = default;
         private readonly SignInManager<User> _signInManager = default;
 
-        public UserRepository(UserManager<User> userManager, SignInManager<User> signInManager)
+        public UserRepository(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationDbContext db)
         {
+            _dbContext = db;
             _userManager = userManager;
             _signInManager = signInManager;
         }
 
         public async Task<bool> ChangeGeneralInformationAsync(int userId, UserInformation info)
         {
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            user.GeneralInformation = info;
-            var result = await _userManager.UpdateAsync(user);
-            return result.Succeeded;
+            var information = await _dbContext.UserInformations.AsNoTracking().FirstOrDefaultAsync(o => o.UserId == userId);
+            info.Id = information.Id;
+            _dbContext.Update(info);
+            return await _dbContext.SaveChangesAsync() >= 0;
         }
 
         public async Task<bool> DeleteUserAsync(int id)
@@ -36,7 +40,10 @@ namespace Registration.DomainCore.Services
 
         public async Task<bool> LogInAsync(LogInUser item)
         {
-            var result = await _signInManager.PasswordSignInAsync(item.Email, item.Password, item.Remember, false);
+            //var result = await _signInManager.PasswordSignInAsync(item.Email, item.Password, item.Remember, false);
+            //return result.Succeeded;
+            var user = await _userManager.FindByEmailAsync(item.Email);
+            var result = await _signInManager.PasswordSignInAsync(user, item.Password, item.Remember, false);
             return result.Succeeded;
         }
 

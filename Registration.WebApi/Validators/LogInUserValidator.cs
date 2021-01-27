@@ -7,27 +7,19 @@ using System.Threading.Tasks;
 
 namespace Registration.WebApi.Validators
 {
-    public class RegisterUserValidator:AbstractValidator<RegisterUserCommand>
+    public class LogInUserValidator : AbstractValidator<LogInCommand>
     {
         [Obsolete]
-        public RegisterUserValidator()
+        public LogInUserValidator()
         {
             RuleFor(o => o.Email)
                 .NotEmpty()
                 .EmailAddress(FluentValidation.Validators.EmailValidationMode.Net4xRegex);
 
-            RuleFor(o => o.UserName)
-            .NotEmpty()
-            .Matches("^[a-zA-Z]*$");
-
             RuleFor(o => o.Password)
-            .NotEmpty()
-            .MinimumLength(3)
-            .Matches(@"^([a-zA-Z0-9]+)$");
-
-            RuleFor(o => o.RemunerationPerMonthe)
-                .GreaterThan(0)
-                .When(o => o.IsEmployed);
+                .NotEmpty()
+                .MinimumLength(3)
+                .Matches(@"^([a-zA-Z0-9]+)$");
         }
     }
 }
