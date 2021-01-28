@@ -18,8 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Registration.ApplicationServices\Registration.BusinessLogicLayer.csproj" />
-    <ProjectReference Include="..\Registration.DomainCore\Registration.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\Registration.BusinessLogicLayer\Registration.BusinessLogicLayer.csproj" />
+    <ProjectReference Include="..\Registration.DataAccessLayer\Registration.DataAccessLayer.csproj" />
   </ItemGroup>
 
 
