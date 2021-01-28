@@ -40,8 +40,6 @@ namespace Registration.DomainCore.Services
 
         public async Task<bool> LogInAsync(LogInUser item)
         {
-            //var result = await _signInManager.PasswordSignInAsync(item.Email, item.Password, item.Remember, false);
-            //return result.Succeeded;
             var user = await _userManager.FindByEmailAsync(item.Email);
             var result = await _signInManager.PasswordSignInAsync(user, item.Password, item.Remember, false);
             return result.Succeeded;

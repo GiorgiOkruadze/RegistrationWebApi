@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Registration.DomainCore.DB
 {
-    public class ApplicationDbContext:IdentityUserContext<User,int>
+    public class ApplicationDbContext: IdentityDbContext<User,UserRole,int>
     {
         public DbSet<UserInformation> UserInformations { get; set; }
         public ApplicationDbContext() { }
@@ -16,7 +16,7 @@ namespace Registration.DomainCore.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=GIORGIOKRUADZE;Database=registration;Trusted_Connection=true;MultipleActiveResultSets=true;");
+            builder.UseSqlServer("Server=GIORGIOKRUADZE;Database=userRegistration;Trusted_Connection=true;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
