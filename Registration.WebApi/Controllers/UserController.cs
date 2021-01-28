@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Registration.BusinessLogicLayer.Commands;
 using System;
@@ -32,11 +33,17 @@ namespace Registration.WebApi.Controllers
         [Route("/api/User/LogIn")]
         public async Task<IActionResult> LogIn([FromBody] LogInCommand item)
         {
-            var response = await _mediator.Send(item);
-            return Ok(response);
+            var token = await _mediator.Send(item);
+            if (token == null)
+            {
+                return Unauthorized();
+            }
+
+            return Ok(token);
         }
 
         [HttpPut]
+        [Authorize]
         [Route("/api/User/UpdateUserInfo/{id}")]
         public async Task<IActionResult> UpdateUserInfo(int id,[FromBody] UpdateUserInfoCommand item)
         {
@@ -46,6 +53,7 @@ namespace Registration.WebApi.Controllers
         }
 
 
+        [Authorize]
         [HttpDelete]
         [Route("/api/User/DeleteUser/{id}")]
         public async Task<IActionResult> DeleteUser(int id)

@@ -22,6 +22,11 @@ using Registration.DataAccessLayer.Services;
 using Registration.BusinessLogicLayer.Mapper;
 using Registration.DataAccessLayer.DB;
 using Registration.DataAccessLayer.Models;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Registration.BusinessLogicLayer.Authentication.Abstraction;
+using Registration.BusinessLogicLayer.Authentication.Authentication;
 
 namespace Registration.WebApi
 {
@@ -53,6 +58,26 @@ namespace Registration.WebApi
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+
+            services.AddAuthentication(o =>
+            {
+                o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                o.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(o =>
+            {
+                o.RequireHttpsMetadata = false;
+                o.SaveToken = true;
+                o.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("JwtToken").Value)),
+                    ValidateIssuerSigningKey = false,
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
+            services.AddSingleton<IJwtAuthenticationManager>
+                (new JwtAuthenticationManager(Configuration.GetSection("JwtToken").Value));
 
             services.AddMvc(o => o.Filters.Add<GlobalValidationFilter>())
                 .AddFluentValidation(Configuration => Configuration.RegisterValidatorsFromAssemblyContaining<Startup>());
