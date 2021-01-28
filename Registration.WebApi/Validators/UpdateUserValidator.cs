@@ -15,6 +15,9 @@ namespace Registration.WebApi.Validators
                 .NotEmpty()
                 .NotEqual(0);
 
+            RuleFor(o => o.PersonalNumber)
+               .Matches(@"^([0-9])$");
+
             RuleFor(o => o.RemunerationPerMonthe)
                 .GreaterThan(0)
                 .When(o => o.IsEmployed);

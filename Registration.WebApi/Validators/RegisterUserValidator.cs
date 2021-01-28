@@ -18,12 +18,16 @@ namespace Registration.WebApi.Validators
 
             RuleFor(o => o.UserName)
             .NotEmpty()
-            .Matches("^[a-zA-Z]*$");
+            .Matches("^[a-zA-Z ]*$");
+
+            RuleFor(o => o.PersonalNumber)
+                .Matches(@"^([0-9])$");
 
             RuleFor(o => o.Password)
             .NotEmpty()
             .MinimumLength(3)
-            .Matches(@"^([a-zA-Z0-9]+)$");
+            .Matches(@" ^ ([a-zA-Z0-9]+)$")
+            .Matches(o => o.PasswordConfirm);
 
             RuleFor(o => o.RemunerationPerMonthe)
                 .GreaterThan(0)
