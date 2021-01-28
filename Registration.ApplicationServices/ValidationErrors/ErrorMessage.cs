@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.ValidationErrors
+namespace Registration.BusinessLogicLayer.ValidationErrors
 {
     public class ErrorMessage
     {

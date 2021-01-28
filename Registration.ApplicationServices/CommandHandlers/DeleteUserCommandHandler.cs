@@ -1,14 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
-using Registration.DomainCore.Services.Abstractions;
-using Registration.WebApi.Commands;
+using Registration.BusinessLogicLayer.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Registration.DataAccessLayer.Services.Abstractions;
 
-namespace Registration.WebApi.CommandHandlers
+namespace Registration.BusinessLogicLayer.CommandHandlers
 {
     public class DeleteUserCommandHandler: IRequestHandler<DeleteUserCommand,bool>
     {

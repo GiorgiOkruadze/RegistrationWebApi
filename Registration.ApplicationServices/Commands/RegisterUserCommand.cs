@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.Commands
+namespace Registration.BusinessLogicLayer.Commands
 {
     public class RegisterUserCommand:IRequest<bool>
     {

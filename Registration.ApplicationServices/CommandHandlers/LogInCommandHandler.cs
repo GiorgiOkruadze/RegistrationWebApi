@@ -1,15 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using Registration.DomainCore.Services.Abstractions;
-using Registration.DomainModels.Models;
-using Registration.WebApi.Commands;
+
+using Registration.BusinessLogicLayer.Commands;
+using Registration.DataAccessLayer.Models;
+using Registration.DataAccessLayer.Services.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.CommandHandlers
+namespace Registration.BusinessLogicLayer.CommandHandlers
 {
     public class LogInCommandHandler : IRequestHandler<LogInCommand, bool>
     {

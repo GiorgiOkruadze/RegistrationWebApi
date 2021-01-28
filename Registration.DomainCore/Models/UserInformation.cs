@@ -1,19 +1,21 @@
-﻿using MediatR;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.Text;
 
-namespace Registration.WebApi.Commands
+namespace Registration.DataAccessLayer.Models
 {
-    public class UpdateUserInfoCommand:IRequest<bool>
+    public class UserInformation
     {
-        public int UserId { get; set; }
+        [Key]
+        public int Id { get; set;  }
         public string PersonalNumber { get; set; }
         public bool IsMarried { get; set; }
         public bool IsEmployed { get; set; }
         public double RemunerationPerMonthe { get; set; }
         public string Address { get; set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
     }
 }

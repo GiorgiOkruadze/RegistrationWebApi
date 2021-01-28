@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
-using Registration.WebApi.ValidationErrors;
+using Registration.BusinessLogicLayer.ValidationErrors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.ValidationFilters
+namespace Registration.BusinessLogicLayer.ValidationFilters
 {
     public class GlobalValidationFilter : IAsyncActionFilter
     {

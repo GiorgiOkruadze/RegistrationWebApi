@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Registration.DomainModels.Models;
+using Registration.DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Registration.DomainCore.DB
+namespace Registration.DataAccessLayer.DB
 {
     public class ApplicationDbContext: IdentityDbContext<User,UserRole,int>
     {

@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using Registration.WebApi.Commands;
+using Registration.BusinessLogicLayer.Commands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.Validators
+namespace Registration.BusinessLogicLayer.Validators
 {
     public class UpdateUserValidator: AbstractValidator<UpdateUserInfoCommand>
     {

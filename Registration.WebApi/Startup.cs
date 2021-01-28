@@ -10,17 +10,18 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Registration.DomainCore.DB;
-using Registration.DomainCore.Services;
-using Registration.DomainCore.Services.Abstractions;
-using Registration.DomainModels.Models;
-using Registration.WebApi.Mapper;
+
 using System;
 using FluentValidation.AspNetCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Registration.WebApi.ValidationFilters;
+using Registration.BusinessLogicLayer.ValidationFilters;
+using Registration.DataAccessLayer.Services.Abstractions;
+using Registration.DataAccessLayer.Services;
+using Registration.BusinessLogicLayer.Mapper;
+using Registration.DataAccessLayer.DB;
+using Registration.DataAccessLayer.Models;
 
 namespace Registration.WebApi
 {
@@ -58,7 +59,8 @@ namespace Registration.WebApi
 
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(ObjectsMapper));
-            services.AddMediatR(typeof(Startup));
+            var assembly = AppDomain.CurrentDomain.Load("Registration.BusinessLogicLayer");
+            services.AddMediatR(assembly);
 
 
             services.AddSwaggerGen(options =>

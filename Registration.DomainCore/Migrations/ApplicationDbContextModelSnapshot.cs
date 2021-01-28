@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Registration.DomainCore.DB;
+using Registration.DataAccessLayer.DB;
 
-namespace Registration.DomainCore.Migrations
+namespace Registration.DataAccessLayer.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -120,7 +120,7 @@ namespace Registration.DomainCore.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Registration.DomainModels.Models.User", b =>
+            modelBuilder.Entity("Registration.DataAccessLayer.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -187,7 +187,7 @@ namespace Registration.DomainCore.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Registration.DomainModels.Models.UserInformation", b =>
+            modelBuilder.Entity("Registration.DataAccessLayer.Models.UserInformation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -220,7 +220,7 @@ namespace Registration.DomainCore.Migrations
                     b.ToTable("UserInformations");
                 });
 
-            modelBuilder.Entity("Registration.DomainModels.Models.UserRole", b =>
+            modelBuilder.Entity("Registration.DataAccessLayer.Models.UserRole", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -251,7 +251,7 @@ namespace Registration.DomainCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.UserRole", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -260,7 +260,7 @@ namespace Registration.DomainCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.User", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -269,7 +269,7 @@ namespace Registration.DomainCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.User", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -278,13 +278,13 @@ namespace Registration.DomainCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.UserRole", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Registration.DomainModels.Models.User", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -293,25 +293,25 @@ namespace Registration.DomainCore.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.User", null)
+                    b.HasOne("Registration.DataAccessLayer.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Registration.DomainModels.Models.UserInformation", b =>
+            modelBuilder.Entity("Registration.DataAccessLayer.Models.UserInformation", b =>
                 {
-                    b.HasOne("Registration.DomainModels.Models.User", "User")
+                    b.HasOne("Registration.DataAccessLayer.Models.User", "User")
                         .WithOne("GeneralInformation")
-                        .HasForeignKey("Registration.DomainModels.Models.UserInformation", "UserId")
+                        .HasForeignKey("Registration.DataAccessLayer.Models.UserInformation", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Registration.DomainModels.Models.User", b =>
+            modelBuilder.Entity("Registration.DataAccessLayer.Models.User", b =>
                 {
                     b.Navigation("GeneralInformation");
                 });

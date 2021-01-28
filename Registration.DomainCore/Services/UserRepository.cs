@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Registration.DomainCore.DB;
-using Registration.DomainCore.Services.Abstractions;
-using Registration.DomainModels.Models;
+using Registration.DataAccessLayer.DB;
+using Registration.DataAccessLayer.Services.Abstractions;
+using Registration.DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Registration.DomainCore.Services
+namespace Registration.DataAccessLayer.Services
 {
     public class UserRepository : IUserRepository
     {

@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Registration.DomainCore.Migrations
+namespace Registration.DataAccessLayer.Migrations
 {
-    public partial class databaseandtablecreation : Migration
+    public partial class databaseandtablescreation : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

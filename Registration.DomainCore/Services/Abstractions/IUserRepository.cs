@@ -1,10 +1,10 @@
-﻿using Registration.DomainModels.Models;
+﻿using Registration.DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Registration.DomainCore.Services.Abstractions
+namespace Registration.DataAccessLayer.Services.Abstractions
 {
     public interface IUserRepository
     {

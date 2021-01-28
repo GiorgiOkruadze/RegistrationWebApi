@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using Registration.DomainModels.Models;
-using Registration.WebApi.Commands;
+using Registration.BusinessLogicLayer.Commands;
+using Registration.DataAccessLayer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Registration.WebApi.Mapper
+namespace Registration.BusinessLogicLayer.Mapper
 {
     public class ObjectsMapper:Profile
     {
