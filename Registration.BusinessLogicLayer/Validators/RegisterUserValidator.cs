@@ -21,12 +21,12 @@ namespace Registration.BusinessLogicLayer.Validators
             .Matches("^[a-zA-Z ]*$");
 
             RuleFor(o => o.PersonalNumber)
-                .Matches(@"^([0-9])$");
+                .Matches(@"^[0-9]+$");
 
             RuleFor(o => o.Password)
             .NotEmpty()
             .MinimumLength(3)
-            .Matches(@" ^ ([a-zA-Z0-9]+)$")
+            .Matches(@"^([a-zA-Z0-9]+)$")
             .Matches(o => o.PasswordConfirm);
 
             RuleFor(o => o.RemunerationPerMonthe)
