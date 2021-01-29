@@ -22,7 +22,7 @@ namespace Registration.BusinessLogicLayer.CommandHandlers
         {
             _mapper = mapper;
             _userRepo = userRepo;
-
+            _authenticationManager = authenticationManager;
         }
 
         public async Task<string> Handle(LogInCommand request, CancellationToken cancellationToken)

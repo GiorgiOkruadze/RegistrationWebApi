@@ -16,6 +16,7 @@ namespace Registration.BusinessLogicLayer.Validators
                 .NotEqual(0);
 
             RuleFor(o => o.PersonalNumber)
+               .NotEmpty()
                .Matches(@"^([0-9])$");
 
             RuleFor(o => o.RemunerationPerMonthe)
