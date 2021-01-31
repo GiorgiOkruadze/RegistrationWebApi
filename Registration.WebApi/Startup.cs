@@ -43,10 +43,14 @@ namespace Registration.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region #DbContext
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+            #endregion
+
+            #region UserAndRole
             services.AddIdentity<User, UserRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
@@ -59,7 +63,9 @@ namespace Registration.WebApi
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
             });
+            #endregion
 
+            #region JWT
             services.AddAuthentication(o =>
             {
                 o.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -79,6 +85,9 @@ namespace Registration.WebApi
 
             services.AddSingleton<IJwtAuthenticationManager>
                 (new JwtAuthenticationManager(Configuration.GetSection("JwtToken").Value));
+
+
+            #endregion
 
             services.AddMvc(o => o.Filters.Add<GlobalValidationFilter>())
                 .AddFluentValidation(Configuration => Configuration.RegisterValidatorsFromAssemblyContaining<GlobalValidationFilter>());
