@@ -16,7 +16,7 @@ namespace Registration.DataAccessLayer.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            builder.UseSqlServer("Server=GIORGIOKRUADZE;Database=userRegistration;Trusted_Connection=true;MultipleActiveResultSets=true;");
+            builder.UseSqlServer("Server=registration.mssql.somee.com;Database=registration;User Id=testStep_SQLLogin_3;password=yqeqdu94oi;Trusted_Connection=False;MultipleActiveResultSets=true;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
