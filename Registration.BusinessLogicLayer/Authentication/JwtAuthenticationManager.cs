@@ -19,9 +19,9 @@ namespace Registration.BusinessLogicLayer.Authentication.Authentication
         }
 
 
-        public string Authenticate(bool status,string email)
+        public string Authenticate(int userId,string email)
         {
-            if (status)
+            if (userId > 0)
             {
                 var tokenKey = Encoding.ASCII.GetBytes(_key);
                 var tokenHandler = new JwtSecurityTokenHandler();
@@ -29,7 +29,8 @@ namespace Registration.BusinessLogicLayer.Authentication.Authentication
                 {
                     Subject = new ClaimsIdentity(new List<Claim>()
                     {
-                        new Claim(ClaimTypes.Name,email)
+                        new Claim(ClaimTypes.Name,email),
+                        new Claim(ClaimTypes.NameIdentifier,userId.ToString())
                     }),
                     Expires = DateTime.UtcNow.AddHours(12),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

@@ -138,6 +138,13 @@ namespace Registration.WebApi
                 });
             });
 
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.AllowAnyOrigin()
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
+
             services.AddControllers();
         }
 
@@ -155,6 +162,8 @@ namespace Registration.WebApi
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseCors("MyPolicy");
 
             app.UseSwagger();
             app.UseSwaggerUI(options =>

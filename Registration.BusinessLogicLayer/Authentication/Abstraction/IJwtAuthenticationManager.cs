@@ -7,6 +7,6 @@ namespace Registration.BusinessLogicLayer.Authentication.Abstraction
 {
     public interface IJwtAuthenticationManager
     {
-        string Authenticate(bool status, string email);
+        string Authenticate(int userId, string email);
     }
 }

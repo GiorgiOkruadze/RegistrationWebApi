@@ -38,11 +38,11 @@ namespace Registration.DataAccessLayer.Services
             return result.Succeeded;
         }
 
-        public async Task<bool> LogInAsync(LogInUser item)
+        public async Task<int> LogInAsync(LogInUser item)
         {
             var user = await _userManager.FindByEmailAsync(item.Email);
             var result = await _signInManager.PasswordSignInAsync(user, item.Password, item.Remember, false);
-            return result.Succeeded;
+            return result.Succeeded ? user.Id : 0;
         }
 
         public async Task<bool> RegistrationAsync(User item,string password)

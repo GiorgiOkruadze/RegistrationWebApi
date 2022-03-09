@@ -9,7 +9,7 @@ namespace Registration.DataAccessLayer.Services.Abstractions
     public interface IUserRepository
     {
         Task<bool> RegistrationAsync(User item,string password);
-        Task<bool> LogInAsync(LogInUser item);
+        Task<int> LogInAsync(LogInUser item);
         Task<bool> DeleteUserAsync(int id);
         Task<bool> ChangeGeneralInformationAsync(int userId, UserInformation info);
     }
